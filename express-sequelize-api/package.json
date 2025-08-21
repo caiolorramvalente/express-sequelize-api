@@ -1,0 +1,13 @@
+{
+  "type": "module",
+  "dependencies": {
+    "@sequelize/postgres": "^7.0.0-alpha.46",
+    "express": "^5.1.0",
+    "init": "^0.1.2",
+    "nodemon": "^3.1.10"
+  },
+  "scripts": {
+    "node": "node ./app/server.js --watch",
+    "dev": "nodemon ./app/server.js"
+  }
+}
