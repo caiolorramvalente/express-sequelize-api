@@ -1,21 +1,13 @@
-import { Sequelize } from '@sequelize/core';
+import { Sequelize } from 'sequelize';
 import { PostgresDialect } from '@sequelize/postgres';
 
 const sequelize = new Sequelize({
-    dialect:PostgresDialect,
+    dialect:"postgres",
     database:"postgres",
-    user:"postgres",
-    password:"senai",
+    username:"postgres",
+    password:"180607",
     host:"localhost",
     port:5432,
 })
- console.time("conexão")
-try{
-    await sequelize.authenticate()
-    console.timeEnd('conexão')
-    console.log("conexão estabelecida")
 
-}catch(error){
-    console.log("algun erro :",error)
-
-}
+export default sequelize
