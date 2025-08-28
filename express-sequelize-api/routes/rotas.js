@@ -11,9 +11,22 @@ router.post("/UserPost",async(req,res)=>{
     const result = new ClientClass(user)
     
     const instace =  await result.insertClient()
-    console.log(instace)
-
+    
     res.json(instace)
+
+})
+router.delete('/deleteUser/:id',async(req,res)=>{
+
+    const id = req.params.id
+
+    console.log(id)
+
+    const result = ClientClass.deleteClient(id)
+
+    res.json(result)
+
+    
+
 
 })
 

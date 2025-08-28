@@ -24,7 +24,8 @@ ClientModel.init({
 },{
     sequelize,
     modelName:'client',
-    tableName:"client"
+    tableName:"client",
+    timestamps:false
     
 })
 

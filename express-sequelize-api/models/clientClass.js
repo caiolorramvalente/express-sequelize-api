@@ -2,7 +2,7 @@ import ClientModel from "./ClientModel.js";
 
 class ClientClass {
 
-    constructor(User){
+    constructor(User={}){
         this.nome=User.nome,
         this.email=User.email,
         this.senha=User.senha
@@ -15,6 +15,18 @@ class ClientClass {
         return result
 
 
+    }
+
+    static async deleteClient(id){
+
+        const result = await ClientModel.destroy({
+            where:{
+                id_client:id
+            }
+
+        })
+        return result
+        
     }
 }
 export default ClientClass
