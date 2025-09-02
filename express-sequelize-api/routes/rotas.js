@@ -25,8 +25,9 @@ router.delete('/deleteUser/:id',async(req,res)=>{
 
     res.json(result)
 
-    
-
+})
+router.get('/getClient/:id',(req,res)=>{
+    const id = req.params.id
 
 })
 
