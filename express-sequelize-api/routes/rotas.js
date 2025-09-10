@@ -26,8 +26,47 @@ router.delete('/deleteUser/:id',async(req,res)=>{
     res.json(result)
 
 })
-router.get('/getClient/:id',(req,res)=>{
+router.get('/getClient/:id',async(req,res)=>{
     const id = req.params.id
+
+    const client = new ClientClass()
+
+    const userByPk = await client.findUserByPk(id)
+
+    res.json(userByPk)
+
+
+})
+
+router.get("/findAllUsers",async (req,res)=>{
+
+    const instace =  new ClientClass()
+
+    const users = await  instace.findAllUsers()
+
+    res.json(users)
+
+})
+
+router.patch("/updateUser/:id",(req,res)=>{
+
+    const id = req.params.id
+
+    const {nome , email} = req.body
+
+    const object = {}
+
+    if(nome) object.nome = nome
+
+    if(email) object.email = email
+
+    console.log(Object.keys(object).length)
+
+    if(Object.keys(object).length === 0){
+         return res.json("nenhum campo foi atualizado")
+    }
+    res.json("tudo certo 🤡")
+
 
 })
 

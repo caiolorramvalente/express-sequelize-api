@@ -28,5 +28,25 @@ class ClientClass {
         return result
         
     }
+
+    async findUserByPk(id){
+
+        const user = await ClientModel.findOne({where:{
+            id_client:id
+        }})
+        return user
+
+    }
+    async findAllUsers(){
+
+        const users = await ClientModel.findAll()
+
+        return users
+
+    }
+
+    async updateUserPatch(){
+        
+    }
 }
 export default ClientClass
