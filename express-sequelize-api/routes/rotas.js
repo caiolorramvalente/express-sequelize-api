@@ -1,42 +1,16 @@
 import { Router } from "express"
 import ClientClass from "../models/clientClass.js"
 
+import UserControllers from "../controllers/UserControllers.js"
+
 
 const router = Router()
 
-router.post("/UserPost",async(req,res)=>{
+router.post("/UserPost",UserControllers.insertClient)
 
-    const user = req.body
+router.delete('/deleteUser/:id',UserControllers.deleteUser)
 
-    const result = new ClientClass(user)
-    
-    const instace =  await result.insertClient()
-    
-    res.json(instace)
-
-})
-router.delete('/deleteUser/:id',async(req,res)=>{
-
-    const id = req.params.id
-
-    console.log(id)
-
-    const result = ClientClass.deleteClient(id)
-
-    res.json(result)
-
-})
-router.get('/getClient/:id',async(req,res)=>{
-    const id = req.params.id
-
-    const client = new ClientClass()
-
-    const userByPk = await client.findUserByPk(id)
-
-    res.json(userByPk)
-
-
-})
+router.get('/getClient/:id',UserControllers.getUserByPk)
 
 router.get("/findAllUsers",async (req,res)=>{
 
@@ -48,26 +22,6 @@ router.get("/findAllUsers",async (req,res)=>{
 
 })
 
-router.patch("/updateUser/:id",(req,res)=>{
-
-    const id = req.params.id
-
-    const {nome , email} = req.body
-
-    const object = {}
-
-    if(nome) object.nome = nome
-
-    if(email) object.email = email
-
-    console.log(Object.keys(object).length)
-
-    if(Object.keys(object).length === 0){
-         return res.json("nenhum campo foi atualizado")
-    }
-    res.json("tudo certo 🤡")
-
-
-})
+router.patch("/updateUser/:id",UserControllers.UpdatePatchUser)
 
 export default router

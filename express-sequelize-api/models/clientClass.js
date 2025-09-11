@@ -45,7 +45,19 @@ class ClientClass {
 
     }
 
-    async updateUserPatch(){
+    async updateUserPatch(id,Object){
+
+        const user = await ClientModel.findByPk(id)
+
+       if(!user){
+        return "o usuario não foi encontrado"
+
+       }
+
+        const result = await user.update(Object)
+
+        return result
+
         
     }
 }
