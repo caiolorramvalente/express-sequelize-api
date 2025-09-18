@@ -15,7 +15,7 @@ ClientModel.init({
     },
     email:{
         type:DataTypes.STRING(200),
-        allowNull:true
+        allowNull:false
     },
     senha:{
         type:DataTypes.STRING(150),
@@ -23,7 +23,7 @@ ClientModel.init({
     }
 },{
     sequelize,
-    modelName:'client',
+    modelName:'clientModel',
     tableName:"client",
     timestamps:false
     
