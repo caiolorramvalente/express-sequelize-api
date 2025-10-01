@@ -1,5 +1,5 @@
-import ClientClass from "../models/clientClass.js";
 
+import ServiceClient from "../service/ServiceClient.js"
 export default{
 
     async insertClient(req,res){
@@ -12,11 +12,9 @@ export default{
 
         }
 
-        const result = new ClientClass({nome,email,senha})
+        const Result =  await ServiceClient.insertClient({nome,email,senha})
 
-         const User = await result.insertClient()
-
-         return res.status(201).json({User})
+         return res.status(201).json({Usuario:Result})
 
 
     
@@ -34,12 +32,9 @@ export default{
     async getUserByPk(req,res){
         const id = req.params.id
         
-            const client = new ClientClass()
-        
-            const userByPk = await client.findUserByPk(id)
-        
-            res.status(200).json(userByPk)
-        
+            const client = await ServiceClient.findUserByPk(id)
+
+            return res.status(200).json({user:client})
 
     },
     async UpdatePatchUser(req,res){
@@ -57,14 +52,29 @@ export default{
     console.log(Object.keys(object).length)
 
     if(Object.keys(object).length === 0){
-         return res.json("nenhum campo foi atualizado")
+         return res.status(400).json("nenhum campo foi atualizado")
     }
 
-    const instace = new ClientClass()
+    try{
+        const result  = await ServiceClient.serviceUpadatePatch(id,object)
 
-    const result = await instace.updateUserPatch(id,object)
         
     return res.status(200).json(result)
+    }catch(erro){
+        console.log("log do catch",erro.message)
+        if(erro.message.includes('email ja utilizado!')){
+            return res.status(400).json({message:"esse email ja foi cadastrado no sistema!,por favor utilize outro"})
+
+        }
+
+    }
+
+
+    } , async getAllusers(req,res){
+
+        const users = await ServiceClient.getAllClients()
+
+        return res.status(200).json({usuarios:users})
 
 
     }

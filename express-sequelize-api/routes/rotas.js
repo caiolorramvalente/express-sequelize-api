@@ -1,6 +1,4 @@
 import { Router } from "express"
-import ClientClass from "../models/clientClass.js"
-
 import UserControllers from "../controllers/UserControllers.js"
 
 
@@ -12,15 +10,7 @@ router.delete('/deleteUser/:id',UserControllers.deleteUser)
 
 router.get('/getClient/:id',UserControllers.getUserByPk)
 
-router.get("/findAllUsers",async (req,res)=>{
-
-    const instace =  new ClientClass()
-
-    const users = await  instace.findAllUsers()
-
-    res.json(users)
-
-})
+router.get("/findAllUsers",UserControllers.getAllusers)
 
 router.patch("/updateUser/:id",UserControllers.UpdatePatchUser)
 
